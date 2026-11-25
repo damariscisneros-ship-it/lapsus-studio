@@ -131,7 +131,7 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
         result = replaceHtmlCommentSlot(result, "figma:body-end", bodyEnd);
 
         const tags: HtmlTagDescriptor[] = [];
-        if (description) {
+        if (description && !result.includes('name="description"')) {
           tags.push({
             tag: "meta",
             attrs: { name: "description", content: description },
@@ -145,17 +145,17 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
             injectTo: "head",
           });
         }
-        if (favicon) {
+        if (favicon && !result.includes('rel="icon"')) {
           tags.push({ tag: "link", attrs: { rel: "icon", href: favicon }, injectTo: "head" });
         }
-        if (title) {
+        if (title && !result.includes('property="og:title"')) {
           tags.push({
             tag: "meta",
             attrs: { property: "og:title", content: title },
             injectTo: "head",
           });
         }
-        if (description) {
+        if (description && !result.includes('property="og:description"')) {
           tags.push({
             tag: "meta",
             attrs: { property: "og:description", content: description },
@@ -163,23 +163,27 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
           });
         }
         if (socialImage) {
-          tags.push(
-            {
+          if (!result.includes('property="og:image"')) {
+            tags.push({
               tag: "meta",
               attrs: { property: "og:image", content: socialImage },
               injectTo: "head",
-            },
-            {
+            });
+          }
+          if (!result.includes('name="twitter:card"')) {
+            tags.push({
               tag: "meta",
               attrs: { name: "twitter:card", content: "summary_large_image" },
               injectTo: "head",
-            },
-            {
+            });
+          }
+          if (!result.includes('name="twitter:image"')) {
+            tags.push({
               tag: "meta",
               attrs: { name: "twitter:image", content: socialImage },
               injectTo: "head",
-            },
-          );
+            });
+          }
         }
 
         if (googleAnalyticsId) {

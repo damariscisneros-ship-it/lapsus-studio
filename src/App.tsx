@@ -690,8 +690,66 @@ function usePath() {
   return path;
 }
 
+const pageMetadata: Record<string, { name: string; description: string }> = {
+  "/": {
+    name: "Inicio",
+    description:
+      "Lapsus es un estudio de fotografía para cuando andas migajeando, sobrepensando o atravesando tu evento canónico.",
+  },
+  "/work": {
+    name: "Trabajo",
+    description:
+      "Conoce el trabajo de Lapsus y nuestras series de fotografía conceptual sobre conflictos románticos.",
+  },
+  "/work/todavia-lo-intento": {
+    name: "Todavía lo intento",
+    description:
+      "Descubre Todavía lo intento, una fotografía conceptual de Lapsus inspirada en la nostalgia y en aquello que aún buscamos alcanzar.",
+  },
+  "/work/atado-al-silencio": {
+    name: "Atado al silencio",
+    description:
+      "Descubre Atado al silencio, una serie conceptual de Lapsus sobre contener sentimientos y el desgaste emocional que provoca.",
+  },
+  "/services": {
+    name: "Servicios",
+    description:
+      "Explora los servicios de fotografía conceptual de Lapsus para convertir tus enredos sentimentales en imágenes.",
+  },
+  "/studio": {
+    name: "Estudio",
+    description:
+      "Conoce la historia de Lapsus, nuestro estudio de fotografía conceptual, y a las personas detrás de cada proyectada.",
+  },
+  "/contact": {
+    name: "Contacto",
+    description:
+      "Contacta a Lapsus para compartir tu historia, elegir un servicio y comenzar tu próxima sesión de fotografía conceptual.",
+  },
+};
+
 export default function App() {
   const path = usePath();
+  const metadata = pageMetadata[path] ?? pageMetadata["/"];
+
+  useEffect(() => {
+    const title = `${metadata.name} — Lapsus`;
+    document.title = title;
+
+    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    const ogTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]');
+    const ogDescription = document.querySelector<HTMLMetaElement>('meta[property="og:description"]');
+    const ogUrl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]');
+
+    description?.setAttribute("content", metadata.description);
+    ogTitle?.setAttribute("content", title);
+    ogDescription?.setAttribute("content", metadata.description);
+    ogUrl?.setAttribute(
+      "content",
+      `https://lapsus.photography${path === "/" ? "" : path}`,
+    );
+  }, [metadata, path]);
+
   if (path === "/") return <Home />;
   if (path === "/work") return <Work />;
   if (cases[path]) return <CaseStudy data={cases[path]} />;

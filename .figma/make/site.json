@@ -1,7 +1,15 @@
 {
-  "description": "Explore Lapsus’s photography portfolio, romantic conflict case studies, services, and studio story, then contact the team through a responsive website.",
+  "title": "Inicio — Lapsus",
+  "description": "Lapsus es un estudio de fotografía para cuando andas migajeando, sobrepensando o atravesando tu evento canónico.",
+  "language": "es",
   "robots": {
-    "index": false
+    "index": true
+  },
+  "icons": {
+    "icon": "/favicon.png"
+  },
+  "openGraph": {
+    "image": "https://lapsus.photography/og-image.png"
   },
   "accessibility": {
     "addBypassLinks": false,
