@@ -1,0 +1,10 @@
+{
+  "description": "Explore Lapsus’s photography portfolio, romantic conflict case studies, services, and studio story, then contact the team through a responsive website.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
