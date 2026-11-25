@@ -613,10 +613,10 @@ function Contact() {
               <input required name="name" placeholder="¿Cómo te decimos?" />
             </Field>
             <Field label="Correo">
-              <input required type="email" name="email" placeholder="¿Cómo te decimos?" />
+              <input required type="email" name="email" placeholder="ejemplo@gmail.com" />
             </Field>
             <Field label="Número / WhatsApp">
-              <input required type="tel" name="phone" placeholder="¿Cómo te decimos?" />
+              <input required type="tel" name="phone" placeholder="+52 81 1234 5678" />
             </Field>
             <Field label="Servicio" className="field-full">
               <select required name="service" defaultValue="">
